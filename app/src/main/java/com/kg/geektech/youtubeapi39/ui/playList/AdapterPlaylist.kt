@@ -3,33 +3,40 @@ package com.kg.geektech.youtubeapi39.ui.playList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kg.geektech.youtubeapi39.R
 import com.kg.geektech.youtubeapi39.databinding.ItemPlaylistBinding
-import com.kg.geektech.youtubeapi39.extensions.loadImg
-import com.kg.geektech.youtubeapi39.model.Items
+import com.kg.geektech.youtubeapi39.core.extensions.loadImg
+import com.kg.geektech.youtubeapi39.data.model.Items
 
-class AdapterPlaylist : RecyclerView.Adapter<AdapterPlaylist.PlaylistHolder>() {
-    private lateinit var list: List<Items>
+class AdapterPlaylist(private val playlist: List<Items>, private val onClick: (id: String) -> Unit) :
+    RecyclerView.Adapter<AdapterPlaylist.ViewHolder>() {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): AdapterPlaylist.PlaylistHolder {
-        val binding = ItemPlaylistBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return PlaylistHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding =
+            ItemPlaylistBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AdapterPlaylist.PlaylistHolder, position: Int) {
-        holder.bind(list[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.onBind(playlist[position])
     }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount(): Int {
+        return playlist.size
+    }
 
-    inner class PlaylistHolder(private val binding: ItemPlaylistBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(items: Items) {
-            binding.ivPlaylist.loadImg(items.snippet.thumbnails.high.url)
-            binding.tvPlaylist.text = items.snippet.channelTitle
-            binding.tvPlaylistName.text = items.snippet.title
+    inner class ViewHolder(private val binding: ItemPlaylistBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun onBind(items: Items) {
+            binding.apply {
+                tvVideo.text = String.format(itemView.context.getString(R.string.video), items.contentDetails.itemCount.toString())
+                tvPlaylistName.text = items.snippet.title
+                ivPlaylist1.loadImg(items.snippet.thumbnails.high.url)
+                tvPlaylist.text = items.snippet.channelTitle
+                itemView.setOnClickListener {
+                    onClick(items.id)
+                }
+            }
         }
-
     }
 }

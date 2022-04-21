@@ -1,6 +1,6 @@
-package com.kg.geektech.youtubeapi39.remote
+package com.kg.geektech.youtubeapi39.data.remote
 
-import com.kg.geektech.youtubeapi39.model.Playlist
+import com.kg.geektech.youtubeapi39.data.model.Playlist
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,6 +11,7 @@ interface ApiService {
     fun getPlaylists(
         @Query("part") part: String,
         @Query("channelId") channelId: String,
-        @Query("key") apiKey: String
+        @Query("key") apiKey: String,
+        @Query("maxResults") maxResult: Int,
     ): Call<Playlist>
 }

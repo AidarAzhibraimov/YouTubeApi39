@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kg.geektech.youtubeapi39">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouTubeApi39">
         <activity
-            android:name=".ui.playList.PlayListActivity"
+            android:name=".ui.detail_playlist.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.playList.PlaylistActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

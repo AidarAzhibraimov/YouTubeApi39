@@ -1,4 +1,4 @@
-package com.kg.geektech.youtubeapi39.extensions
+package com.kg.geektech.youtubeapi39.core.extensions
 
 import android.content.Context
 import android.widget.Toast
