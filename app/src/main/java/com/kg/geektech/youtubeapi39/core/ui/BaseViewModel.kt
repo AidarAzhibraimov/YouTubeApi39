@@ -1,4 +1,4 @@
-package com.kg.geektech.youtubeapi39.base
+package com.kg.geektech.youtubeapi39.core.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

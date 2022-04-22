@@ -1,4 +1,4 @@
-package com.kg.geektech.youtubeapi39.core
+package com.kg.geektech.youtubeapi39.core.network
 
 import com.kg.geektech.youtubeapi39.BuildConfig.BASE_URL
 import com.kg.geektech.youtubeapi39.data.remote.ApiService
@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class RetrofitClient {
+
     companion object {
 
         fun create(): ApiService {
@@ -17,9 +18,9 @@ class RetrofitClient {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
             val okHttpClient = OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20,TimeUnit.SECONDS)
-                .connectTimeout(20,TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
                 .build()
 
@@ -30,8 +31,6 @@ class RetrofitClient {
                 .build()
 
             return retrofit.create(ApiService::class.java)
-
         }
     }
-
 }
